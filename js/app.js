@@ -148,13 +148,13 @@ function refreshLockStates() {
             if (!isUnlocked) {
                 navBtn.classList.add('nav-locked');
                 navBtn.title = `Bloqueado: Completa los 10 módulos del Paso ${i - 1}`;
-                navBtn.innerHTML = `<i class="fas fa-lock" style="color: var(--text-dim); margin-right: 4px;"></i> Paso ${i}: ${i === 2 ? 'Expande' : 'Practica'}`;
+                navBtn.innerHTML = `<i class="fas fa-lock" style="color: var(--text-dim); margin-right: 4px;"></i> <span class="tab-step-text"><strong class="step-num-label">Paso ${i}</strong><span class="step-sub-label">${i === 2 ? 'Expande' : 'Practica'}</span></span>`;
             } else {
                 navBtn.classList.remove('nav-locked');
                 navBtn.title = '';
                 const icon = i === 2 ? 'fa-wave-square' : 'fa-tree';
                 const color = i === 2 ? 'var(--aura-purple)' : 'var(--aura-cyan)';
-                navBtn.innerHTML = `<i class="fas ${icon}" style="color: ${color};"></i> Paso ${i}: ${i === 2 ? 'Expande' : 'Practica'}`;
+                navBtn.innerHTML = `<i class="fas ${icon}" style="color: ${color};"></i> <span class="tab-step-text"><strong class="step-num-label">Paso ${i}</strong><span class="step-sub-label">${i === 2 ? 'Expande' : 'Practica'}</span></span>`;
             }
         }
     }

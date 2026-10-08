@@ -19,7 +19,7 @@
 
     <!-- Google Fonts & FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=9.0">
+    <link rel="stylesheet" href="css/style.css?v=10.0">
 </head>
 <body>
     <!-- Ambient Aurora Wisps & Film Grain -->
@@ -28,6 +28,7 @@
 
     <!-- Top Navigation Bar -->
     <header class="aura-navbar">
+        <!-- Brand identity -->
         <a class="brand-wrapper" onclick="selectStep(1)" style="cursor: pointer;">
             <img src="assets/aura_logo_3d.png" alt="A.U.R.A" class="brand-icon-img">
             <div class="brand-title-box">
@@ -36,44 +37,63 @@
             </div>
         </a>
 
-        <!-- Step Selector Navigation Tabs -->
-        <nav class="nav-tabs-wrapper">
-            <button class="nav-tab-btn active" id="nav-step-1" onclick="selectStep(1)">
-                <i class="fas fa-mountain" style="color: var(--aura-gold);"></i> Paso 1: Reconoce
-            </button>
-            <button class="nav-tab-btn" id="nav-step-2" onclick="selectStep(2)">
-                <i class="fas fa-wave-square" style="color: var(--aura-purple);"></i> Paso 2: Expande
-            </button>
-            <button class="nav-tab-btn" id="nav-step-3" onclick="selectStep(3)">
-                <i class="fas fa-tree" style="color: var(--aura-cyan);"></i> Paso 3: Practica
-            </button>
-        </nav>
-
-        <!-- Action & Progress Buttons -->
-        <div class="nav-actions-wrapper">
-            <!-- Global Progress Pill -->
-            <div class="nav-global-pill" title="Progreso Total de los 30 Módulos">
-                <i class="fas fa-shield-alt" style="color: var(--aura-emerald);"></i>
-                <span>Soberanía: <strong id="nav-global-pct">0%</strong></span>
-            </div>
-
+        <!-- Quick Action Buttons: Audio & Logout -->
+        <div class="nav-quick-actions">
             <!-- Audio Binaural Quick Toggle -->
             <button id="btn-quick-audio" class="btn-glass-nav" onclick="toggleSimulator()" title="Generador de Ondas Alfa 14 Hz">
                 <i class="fas fa-headphones" style="color: var(--aura-gold);"></i>
-                <span id="quick-audio-label">Ondas 14 Hz</span>
+                <span id="quick-audio-label">14 Hz</span>
             </button>
-
-            <!-- User Badge -->
-            <div class="nav-global-pill" style="display:flex; align-items:center; gap:6px;" title="Usuario Activo">
-                <i class="fas fa-user-check" style="color: var(--aura-gold);"></i>
-                <span class="user-email-display" style="max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Alumno</span>
-            </div>
 
             <!-- Logout -->
-            <button class="btn-glass-nav" onclick="logout()" title="Cerrar Sesión">
-                <i class="fas fa-sign-out-alt"></i> Salir
+            <button class="btn-glass-nav btn-logout" onclick="logout()" title="Cerrar Sesión">
+                <i class="fas fa-sign-out-alt"></i> <span>Salir</span>
             </button>
         </div>
+
+        <!-- Status & Account Strip (Sync, User Email, Soberanía %) -->
+        <div class="nav-status-strip">
+            <div class="status-strip-left" id="status-strip-left">
+                <!-- User Badge -->
+                <div class="nav-global-pill nav-user-pill" title="Usuario Activo">
+                    <i class="fas fa-user-check" style="color: var(--aura-gold);"></i>
+                    <span class="user-email-display">Alumno</span>
+                </div>
+            </div>
+
+            <div class="status-strip-right">
+                <!-- Global Progress Pill -->
+                <div class="nav-global-pill nav-progress-pill" title="Progreso Total de los 30 Módulos">
+                    <i class="fas fa-shield-alt" style="color: var(--aura-emerald);"></i>
+                    <span>Soberanía: <strong id="nav-global-pct">0%</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step Selector Navigation Tabs -->
+        <nav class="nav-tabs-wrapper">
+            <button class="nav-tab-btn active" id="nav-step-1" onclick="selectStep(1)">
+                <i class="fas fa-mountain" style="color: var(--aura-gold);"></i>
+                <span class="tab-step-text">
+                    <strong class="step-num-label">Paso 1</strong>
+                    <span class="step-sub-label">Reconoce</span>
+                </span>
+            </button>
+            <button class="nav-tab-btn" id="nav-step-2" onclick="selectStep(2)">
+                <i class="fas fa-wave-square" style="color: var(--aura-purple);"></i>
+                <span class="tab-step-text">
+                    <strong class="step-num-label">Paso 2</strong>
+                    <span class="step-sub-label">Expande</span>
+                </span>
+            </button>
+            <button class="nav-tab-btn" id="nav-step-3" onclick="selectStep(3)">
+                <i class="fas fa-tree" style="color: var(--aura-cyan);"></i>
+                <span class="tab-step-text">
+                    <strong class="step-num-label">Paso 3</strong>
+                    <span class="step-sub-label">Practica</span>
+                </span>
+            </button>
+        </nav>
     </header>
 
     <!-- Main Platform Hub Container -->
@@ -391,8 +411,8 @@
     <script src="js/courses-data.js?v=8.0"></script>
     <script src="js/aura-content-engine.js?v=8.0"></script>
     <script src="js/aura-quiz-engine.js?v=8.0"></script>
-    <script src="js/aura-sync.js?v=1.0"></script>
-    <script src="js/app.js?v=8.0"></script>
+    <script src="js/aura-sync.js?v=2.0"></script>
+    <script src="js/app.js?v=9.0"></script>
     <script src="js/auth.js?v=8.0"></script>
 </body>
 </html>

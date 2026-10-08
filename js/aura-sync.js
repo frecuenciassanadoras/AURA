@@ -92,7 +92,7 @@
     function updateSyncIndicator(status, text) {
         let el = document.getElementById('aura-cloud-sync-badge');
         if (!el) {
-            const navActions = document.querySelector('.nav-actions-wrapper');
+            const navActions = document.getElementById('status-strip-left') || document.querySelector('.nav-actions-wrapper');
             if (navActions) {
                 el = document.createElement('div');
                 el.id = 'aura-cloud-sync-badge';

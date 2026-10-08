@@ -250,10 +250,40 @@ body {
     box-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
 }
 
-.nav-actions-wrapper {
+.tab-step-text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.step-num-label {
+    font-weight: 700;
+}
+
+.step-num-label::after {
+    content: ": ";
+}
+
+.step-sub-label {
+    font-weight: 500;
+}
+
+.nav-quick-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+}
+
+.nav-status-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-strip-left, .status-strip-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .nav-global-pill {
@@ -266,6 +296,12 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
+}
+
+.nav-user-pill {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .nav-global-pill strong {
@@ -315,6 +351,39 @@ body {
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
     border-color: var(--border-medium);
+}
+
+@media (min-width: 769px) {
+    .aura-navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        height: 72px;
+        padding: 0 32px;
+    }
+    .brand-wrapper {
+        order: 1;
+        flex-shrink: 0;
+    }
+    .nav-tabs-wrapper {
+        order: 2;
+        margin: 0 auto;
+    }
+    .nav-status-strip {
+        order: 3;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+    .nav-quick-actions {
+        order: 4;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
 }
 
 /* ===================================================================
@@ -1519,83 +1588,203 @@ body {
 }
 
 @media (max-width: 768px) {
-    /* Navbar Mobile Adaptation */
+    /* Navbar Mobile Adaptation: 3 Tiers (Brand+Actions / Status Strip / 3 Step Tabs) */
     .aura-navbar {
-        padding: 10px 14px;
-        padding-top: max(10px, env(safe-area-inset-top, 10px));
-        height: auto;
-        flex-wrap: wrap;
-        row-gap: 8px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "brand actions"
+            "status status"
+            "tabs tabs";
+        row-gap: 10px;
         column-gap: 8px;
+        padding: 12px 14px 12px;
+        padding-top: max(12px, env(safe-area-inset-top, 12px));
+        height: auto;
+        background: rgba(10, 11, 16, 0.96);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
+    /* Tier 1: Brand (Left) */
     .brand-wrapper {
+        grid-area: brand;
+        align-self: center;
         gap: 8px;
     }
 
     .brand-icon-img {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
     }
 
     .brand-name {
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         letter-spacing: 2.5px;
     }
 
     .brand-tagline {
-        font-size: 0.58rem;
-        letter-spacing: 1px;
+        display: none; /* Se oculta en móvil para dar máxima limpieza y espacio */
     }
 
-    .nav-actions-wrapper {
+    /* Tier 1: Quick Actions (Right) - Botones grandes, táctiles y usables */
+    .nav-quick-actions {
+        grid-area: actions;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-self: end;
+    }
+
+    .nav-quick-actions .btn-glass-nav {
+        padding: 7px 13px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+    }
+
+    .nav-quick-actions .btn-logout {
+        color: #f87171;
+        border-color: rgba(239, 68, 68, 0.3);
+        background: rgba(239, 68, 68, 0.08);
+    }
+
+    /* Tier 2: Status & Account Bar (En la nube + Correo a la izq, Soberanía a la der) */
+    .nav-status-strip {
+        grid-area: status;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+        padding: 4px 6px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .status-strip-left {
+        display: flex;
+        align-items: center;
         gap: 6px;
-        flex-wrap: nowrap;
-        margin-left: auto;
+        min-width: 0;
+        flex: 1;
+        overflow: hidden;
     }
 
-    .nav-global-pill {
-        padding: 5px 9px;
-        font-size: 0.72rem;
-        gap: 5px;
+    #aura-cloud-sync-badge {
+        padding: 5px 9px !important;
+        font-size: 0.72rem !important;
+        font-weight: 600 !important;
+        flex-shrink: 0;
+        border-radius: 8px !important;
+        background: rgba(16, 185, 129, 0.12) !important;
+        border: 1px solid rgba(16, 185, 129, 0.3) !important;
     }
 
-    .btn-glass-nav {
-        padding: 5px 9px;
-        font-size: 0.72rem;
-        gap: 5px;
+    .nav-user-pill {
+        padding: 5px 9px !important;
+        font-size: 0.72rem !important;
+        font-weight: 600 !important;
+        background: rgba(245, 158, 11, 0.08) !important;
+        border: 1px solid rgba(245, 158, 11, 0.25) !important;
+        border-radius: 8px !important;
+        min-width: 0;
+        overflow: hidden;
     }
 
     .user-email-display {
-        max-width: 80px;
+        max-width: 130px !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: middle;
     }
 
-    .nav-tabs-wrapper {
-        order: 3;
-        width: 100%;
+    .status-strip-right {
         display: flex;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 4px;
-        padding: 3px;
-        border-radius: 12px;
-        margin-top: 2px;
+        align-items: center;
+        flex-shrink: 0;
     }
 
-    .nav-tabs-wrapper::-webkit-scrollbar {
-        display: none;
+    .nav-progress-pill {
+        padding: 5px 10px !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+        background: rgba(16, 185, 129, 0.12) !important;
+        border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    }
+
+    /* Tier 3: 3-Step Segmented Control (Grandes, cómodos, 3 columnas táctiles) */
+    .nav-tabs-wrapper {
+        grid-area: tabs;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-subtle);
+        padding: 4px;
+        border-radius: 14px;
+        box-sizing: border-box;
     }
 
     .nav-tab-btn {
-        flex: 1 1 0;
-        min-width: 0;
-        padding: 8px 8px;
-        font-size: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
+        gap: 2px;
+        padding: 8px 4px;
+        min-height: 48px;
+        border-radius: 10px;
         text-align: center;
-        white-space: nowrap;
-        gap: 6px;
+        font-size: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .tab-step-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 1.15;
+    }
+
+    .step-num-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+    }
+
+    .step-num-label::after {
+        content: ""; /* No dos puntos en móvil */
+    }
+
+    .step-sub-label {
+        font-size: 0.68rem;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .nav-tab-btn.active {
+        background: #ffffff !important;
+        color: #050507 !important;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.3) !important;
+    }
+
+    .nav-tab-btn.active .step-sub-label {
+        color: #1e293b !important;
+        font-weight: 700 !important;
+    }
+
+    .nav-tab-btn.active i {
+        color: #050507 !important;
     }
 
     /* Main Container & Hero */
@@ -2005,38 +2194,14 @@ body {
 }
 
 @media (max-width: 480px) {
-    /* Extra optimization for narrower iPhones (SE, Mini, 375px) */
-    .brand-tagline {
-        display: none;
-    }
-
+    /* Refinamiento ergonómico para pantallas estrechas (iPhone SE / 375px) */
     .brand-name {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         letter-spacing: 2px;
     }
 
-    .nav-actions-wrapper {
-        gap: 4px;
-    }
-
-    .nav-global-pill {
-        padding: 4px 7px;
-        font-size: 0.68rem;
-    }
-
     .user-email-display {
-        max-width: 55px;
-    }
-
-    #btn-quick-audio {
-        padding: 4px 7px;
-        font-size: 0.68rem;
-    }
-
-    .nav-tab-btn {
-        padding: 7px 4px;
-        font-size: 0.7rem;
-        gap: 4px;
+        max-width: 105px !important;
     }
 
     .step-hub-banner {
@@ -2048,15 +2213,15 @@ body {
     }
 
     .hub-stat-val {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
     }
 
     .hub-stat-desc {
-        font-size: 0.65rem;
+        font-size: 0.68rem;
     }
 
     .mod-card-title {
-        font-size: 1.08rem;
+        font-size: 1.1rem;
     }
 }
 
