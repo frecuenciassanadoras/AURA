@@ -541,17 +541,27 @@ const AURA_STEPS = [
     }
 ];
 
-// Helper para obtener módulos y estado de completitud desde localStorage
-function getModuleCompletionKey(globalId) {
-    return `aura_mod_completed_${globalId}`;
+// Helper para obtener módulos y estado de completitud particionado por usuario y sincronizado
+function getActiveUserEmail() {
+    return (localStorage.getItem('aura_session') || localStorage.getItem('aura_user_email') || 'default').toLowerCase().trim();
 }
 
 function isModuleCompleted(globalId) {
-    return localStorage.getItem(getModuleCompletionKey(globalId)) === 'true';
+    const userEmail = getActiveUserEmail();
+    const userVal = localStorage.getItem(`aura_mod_completed_${userEmail}_${globalId}`);
+    if (userVal !== null) return userVal === 'true';
+    return localStorage.getItem(`aura_mod_completed_${globalId}`) === 'true';
 }
 
 function setModuleCompleted(globalId, status) {
-    localStorage.setItem(getModuleCompletionKey(globalId), status ? 'true' : 'false');
+    const userEmail = getActiveUserEmail();
+    localStorage.setItem(`aura_mod_completed_${userEmail}_${globalId}`, status ? 'true' : 'false');
+    localStorage.setItem(`aura_mod_completed_${globalId}`, status ? 'true' : 'false');
+
+    // Sincronizar automáticamente a la nube en Supabase
+    if (window.AuraSync && window.AuraSync.save) {
+        window.AuraSync.save();
+    }
 }
 
 function getStepProgress(stepId) {
@@ -606,14 +616,16 @@ function getStepRequirementNotice(stepNumber) {
     return '';
 }
 
-// Comprobar si un módulo fue aprobado con >= 80%
+// Comprobar si un módulo fue aprobado con >= 80% (por usuario)
 function isModuleApproved(globalId) {
     if (window.AuraQuizEngine && window.AuraQuizEngine.isApproved) {
         return window.AuraQuizEngine.isApproved(globalId);
     }
-    const passed = localStorage.getItem('aura_quiz_passed_' + globalId) === 'true';
-    const score = parseInt(localStorage.getItem('aura_quiz_score_' + globalId) || '0', 10);
-    return passed || score >= 80;
+    const userEmail = getActiveUserEmail();
+    const passedUser = localStorage.getItem(`aura_quiz_passed_${userEmail}_${globalId}`);
+    const passedGen = localStorage.getItem('aura_quiz_passed_' + globalId);
+    const score = parseInt(localStorage.getItem(`aura_quiz_score_${userEmail}_${globalId}`) || localStorage.getItem('aura_quiz_score_' + globalId) || '0', 10);
+    return passedUser === 'true' || passedGen === 'true' || score >= 80;
 }
 
 // Comprobar si un módulo dentro de un paso es accesible (prerrequisito secuencial)
