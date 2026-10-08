@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#14141c"/>
+      <stop offset="65%" stop-color="#09090c"/>
+      <stop offset="100%" stop-color="#040406"/>
+    </radialGradient>
+    <radialGradient id="haloGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#b45309" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="haloRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#d97706" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#fef08a"/>
+      <stop offset="65%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <filter id="glowPath" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur1"/>
+      <feGaussianBlur stdDeviation="3" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+
+    <style>
+      @keyframes breatheHalo {
+        0%, 100% { opacity: 0.65; transform: scale(1); }
+        50%      { opacity: 0.95; transform: scale(1.03); }
+      }
+      @keyframes flowEnergy {
+        0%   { stroke-dashoffset: 400; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes pulseSummit {
+        0%, 100% { r: 3.5; opacity: 0.85; filter: drop-shadow(0 0 6px #ffffff); }
+        50%      { r: 6.5; opacity: 1; filter: drop-shadow(0 0 16px #fbbf24); }
+      }
+      @keyframes twinkleStar {
+        0%, 100% { opacity: 0.2; transform: scale(0.8); }
+        50%      { opacity: 0.9; transform: scale(1.2); }
+      }
+      @keyframes pulseRing {
+        0%   { r: 110; opacity: 0.8; }
+        50%  { r: 118; opacity: 0.4; }
+        100% { r: 110; opacity: 0.8; }
+      }
+      .anim-halo {
+        transform-origin: 250px 245px;
+        animation: breatheHalo 6s ease-in-out infinite;
+      }
+      .anim-ring {
+        animation: pulseRing 5s ease-in-out infinite;
+      }
+      .anim-path-flow {
+        stroke-dasharray: 12 16;
+        animation: flowEnergy 8s linear infinite;
+      }
+      .anim-path-pulse {
+        stroke-dasharray: 40 360;
+        animation: flowEnergy 3.5s ease-in-out infinite;
+      }
+      .anim-summit {
+        animation: pulseSummit 2.8s ease-in-out infinite;
+      }
+      .star-1 { animation: twinkleStar 3s ease-in-out infinite; transform-origin: 120px 100px; }
+      .star-2 { animation: twinkleStar 4.2s ease-in-out infinite 1s; transform-origin: 380px 120px; }
+      .star-3 { animation: twinkleStar 3.6s ease-in-out infinite 2s; transform-origin: 290px 70px; }
+    </style>
+  </defs>
+
+  <rect width="500" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Ambient Twinkling Stars in Night Sky -->
+  <circle cx="120" cy="100" r="1.5" fill="#fef08a" class="star-1"/>
+  <circle cx="380" cy="120" r="1.8" fill="#fde047" class="star-2"/>
+  <circle cx="290" cy="70" r="1.5" fill="#ffffff" class="star-3"/>
+  <circle cx="90" cy="160" r="1.2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="410" cy="180" r="1.2" fill="#fef08a" opacity="0.5"/>
+
+  <!-- Halo Ring behind Mountain Summit with Breathing Motion -->
+  <g class="anim-halo">
+    <circle cx="250" cy="245" r="130" fill="url(#haloGlow)"/>
+    <circle cx="250" cy="245" r="115" stroke="url(#haloRing)" stroke-width="2" fill="none" opacity="0.8" filter="url(#softGlow)" class="anim-ring"/>
+    <circle cx="250" cy="245" r="115" stroke="url(#haloRing)" stroke-width="1.2" fill="none" opacity="0.95"/>
+  </g>
+
+  <!-- Background mountain peaks -->
+  <path d="M-10 390 L70 330 L150 365 L220 310 L290 350 L380 300 L450 355 L510 330 L510 500 L-10 500 Z" fill="#0b0d13" opacity="0.6"/>
+  <path d="M-10 410 L100 350 L180 380 L260 330 L340 375 L430 340 L510 410 L510 500 L-10 500 Z" fill="#0f1118"/>
+
+  <!-- Main Dark Mountain Silhouette -->
+  <path d="M250 185 L290 235 L340 295 L420 370 L500 440 L500 500 L0 500 L0 440 L70 375 L140 315 L200 245 Z" fill="#07080b"/>
+  <!-- Dark shaded left face -->
+  <path d="M250 185 L255 220 L238 250 L270 300 L238 350 L280 410 L230 460 L250 500 L0 500 L0 440 L70 375 L140 315 L200 245 Z" fill="#040507"/>
+  <!-- Highlighted right face facets -->
+  <path d="M250 185 L275 225 L260 255 L290 305 L275 355 L320 415 L295 465 L330 500 L500 500 L500 440 L420 370 L340 295 L290 235 Z" fill="#131620" opacity="0.7"/>
+
+  <!-- Subtle crest highlights -->
+  <path d="M250 185 L275 225 L260 255 L290 305 L275 355 L320 415 L295 465" stroke="#2c3345" stroke-width="1.2" fill="none" opacity="0.65"/>
+  <path d="M250 185 L240 215 L255 245 L235 295 L250 345" stroke="#1c202a" stroke-width="1" fill="none" opacity="0.5"/>
+
+  <!-- Golden Winding Path (Static Glow Base) -->
+  <path d="M250 200 Q230 235 272 275 T228 345 T285 405 T190 455 T250 495" stroke="#f59e0b" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.25" filter="url(#softGlow)"/>
+  <path d="M250 200 Q230 235 272 275 T228 345 T285 405 T190 455 T250 495" stroke="#fbbf24" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.65" filter="url(#glowPath)"/>
+  <path d="M250 200 Q230 235 272 275 T228 345 T285 405 T190 455 T250 495" stroke="url(#pathGrad)" stroke-width="2.8" stroke-linecap="round" fill="none" opacity="0.95"/>
+  
+  <!-- Living Animated Golden Energy River Running up the Path -->
+  <path d="M250 200 Q230 235 272 275 T228 345 T285 405 T190 455 T250 495" stroke="#fffbeb" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8" class="anim-path-flow"/>
+  
+  <!-- Fast traveling beacon pulse -->
+  <path d="M250 200 Q230 235 272 275 T228 345 T285 405 T190 455 T250 495" stroke="#ffffff" stroke-width="5" stroke-linecap="round" fill="none" filter="url(#glowPath)" class="anim-path-pulse"/>
+
+  <!-- Glowing Summit Spark (Pulsating Living Light) -->
+  <circle cx="250" cy="200" r="3.5" fill="#ffffff" filter="url(#glowPath)" class="anim-summit"/>
+</svg>
