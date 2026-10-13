@@ -1,16 +1,22 @@
 {
-  "name": "A.U.R.A - Método de Expansión Somática",
+  "name": "A.U.R.A - Biohacking Neurosónico",
   "short_name": "A.U.R.A",
-  "description": "Plataforma de respiración, regulación nerviosa y soberanía somática.",
+  "description": "Plataforma de respiración, regulación nerviosa y biohacking neurosónico.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#050507",
-  "theme_color": "#050507",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "assets/aura_logo_3d.png",
+      "src": "assets/icon-192.png",
       "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
