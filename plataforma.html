@@ -16,23 +16,33 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="manifest.json">
 
-    <!-- Google Fonts & FontAwesome -->
+    <!-- Google Fonts: Inter & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css?v=10.0">
+    <link rel="stylesheet" href="css/style.css?v=11.0">
 </head>
 <body>
-    <!-- Ambient Aurora Wisps & Film Grain -->
+    <!-- Ambient Subtle Glow Background -->
     <div class="aura-ambient-bg"></div>
-    <div class="film-grain"></div>
 
     <!-- Top Navigation Bar -->
     <header class="aura-navbar">
         <!-- Brand identity -->
-        <a class="brand-wrapper" onclick="selectStep(1)" style="cursor: pointer;">
-            <img src="assets/aura_logo_3d.png" alt="A.U.R.A" class="brand-icon-img">
+        <a class="brand-wrapper" onclick="selectStep(1)" style="cursor: pointer;" title="Ir al Paso 1">
+            <svg class="brand-triangle-logo" viewBox="0 0 24 24" fill="none">
+                <polygon points="12,2 22,20 2,20" fill="url(#brandGradNav)" />
+                <defs>
+                    <linearGradient id="brandGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#8052ff" />
+                        <stop offset="100%" stop-color="#15846e" />
+                    </linearGradient>
+                </defs>
+            </svg>
             <div class="brand-title-box">
                 <span class="brand-name">A.U.R.A</span>
-                <span class="brand-tagline">MÉTODO DE EXPANSIÓN SOMÁTICA</span>
+                <span class="brand-tagline">BIOHACKING SOMÁTICO</span>
             </div>
         </a>
 
@@ -109,11 +119,21 @@
              ======================================================== -->
         <section class="platform-hero-section">
             <header class="slide-brand-header">
-                <img src="assets/logo.svg" alt="AURA Logo" class="slide-brand-logo">
-                <h1 class="slide-brand-title">A &middot; U &middot; R &middot; A</h1>
-                <p class="slide-brand-sub">MÉTODO DE EXPANSIÓN & REGULACIÓN NERVIOSA</p>
+                <div class="hero-brand-symbol">
+                    <svg class="brand-triangle-logo hero-symbol-svg" viewBox="0 0 24 24" fill="none">
+                        <polygon points="12,2 22,20 2,20" fill="url(#heroGrad)" />
+                        <defs>
+                            <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#8052ff" />
+                                <stop offset="100%" stop-color="#15846e" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1 class="slide-brand-title">A.U.R.A</h1>
+                <p class="slide-brand-sub">REGULACIÓN DEL SISTEMA NERVIOSO &bull; BIOHACKING SOMÁTICO</p>
                 <p class="hero-manifesto-sub">
-                    No se trata de evitar lo que sientes, sino de desarrollar la capacidad somática para <span class="gold-gradient-text">atravesarlo sin perder tu centro</span>.
+                    No se trata de evitar lo que sientes, sino de desarrollar la capacidad biológica para <span class="gradient-text-accent">atravesarlo sin perder tu centro</span>.
                 </p>
             </header>
 
@@ -333,7 +353,15 @@
             
             <header class="player-room-navbar">
                 <div style="display: flex; align-items: center; gap: 14px;">
-                    <img src="assets/logo.svg" alt="AURA" style="width: 28px; height: 28px;">
+                    <svg class="brand-triangle-logo" viewBox="0 0 24 24" fill="none" style="width: 24px; height: 24px; flex-shrink: 0;">
+                        <polygon points="12,2 22,20 2,20" fill="url(#playerGrad)" />
+                        <defs>
+                            <linearGradient id="playerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#8052ff" />
+                                <stop offset="100%" stop-color="#15846e" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                     <div>
                         <h2 id="player-course-title" style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff;">Título del Módulo</h2>
                         <span id="player-course-subtitle" style="font-size: 0.78rem; color: var(--text-dim);">Paso Activo de AURA</span>

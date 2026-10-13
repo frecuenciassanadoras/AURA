@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (onLoginPage) {
         // Si ya tiene sesión activa y no cerró sesión explícitamente, enviar directo al panel
         if (session && sessionStorage.getItem('aura_logged_out') !== '1') {
-            window.location.replace('index.html');
+            window.location.replace('plataforma.html');
             return;
         }
 
@@ -120,7 +120,7 @@ async function handleLogin(event) {
                 }
 
                 setTimeout(() => {
-                    window.location.replace('index.html');
+                    window.location.replace('plataforma.html');
                 }, 400);
             } else {
                 showError(errorMsg, 'Contraseña incorrecta. Por favor verifica tus datos.');

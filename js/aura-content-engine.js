@@ -16,14 +16,14 @@
                              stepNum === 2 ? "Ventana de Tolerancia Somática" :
                              "Integración Diaria & Maestría";
 
-        return `# AURA &bull; ${stepTag}
+        return `# AURA • ${stepTag}
 ## ${stepSubtitle}
 ---
 
 # MÓDULO ${mod.number}: ${mod.title}
 ### *${mod.subtitle}*
 
-> **DURACIÓN ESTIMADA:** ${mod.duration} &bull; **TIPO:** ${mod.type} &bull; **ENFOQUE:** ${mod.badge}
+> **DURACIÓN ESTIMADA:** ${mod.duration} • **TIPO:** ${mod.type} • **ENFOQUE:** ${mod.badge}
 
 ---
 

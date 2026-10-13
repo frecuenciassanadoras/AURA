@@ -486,7 +486,7 @@ function loadReaderModuleContent(mod) {
     const body = document.getElementById('reader-body');
     const quizContainer = document.getElementById('reader-quiz-container');
 
-    if (badge) badge.textContent = `PASO ${mod.stepNumber} &bull; MÓDULO ${mod.number} &bull; ${mod.badge}`;
+    if (badge) badge.textContent = `PASO ${mod.stepNumber} • MÓDULO ${mod.number} • ${mod.badge}`;
     if (title) title.textContent = mod.title;
 
     // Actualizar estado del botón de completado
