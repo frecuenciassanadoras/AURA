@@ -102,6 +102,36 @@ function selectStep(stepNum, shouldScroll = true) {
     }
 }
 
+
+// ====================================================================
+// NOTIFICACIÓN FLOTANTE ELEGANTE ESTILO AURA TOAST
+// ====================================================================
+function showToast(title, message, icon = 'fa-info-circle') {
+    let container = document.querySelector('.aura-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'aura-toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'aura-toast-box';
+    toast.innerHTML = `
+        <div class="toast-icon"><i class="fas ${icon}"></i></div>
+        <div class="toast-content">
+            <span class="toast-title">${title}</span>
+            <span class="toast-msg">${message}</span>
+        </div>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('toast-fadeout');
+        setTimeout(() => toast.remove(), 350);
+    }, 4500);
+}
+
 // Alerta elegante de paso bloqueado con vibración visual
 function showLockedAlert(stepNum, message) {
     const card = document.getElementById(`card-step-${stepNum}`);

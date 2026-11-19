@@ -340,7 +340,13 @@
 
     // Evaluar respuestas enviadas
     function submitQuiz(globalId) {
-        const mod = window.AuraApp ? window.AuraApp.findModule(globalId) : null;
+        let mod = window.AuraApp ? window.AuraApp.findModule(globalId) : null;
+        if (!mod && window.AURA_STEPS) {
+            for (const step of window.AURA_STEPS) {
+                const found = step.modules.find(m => m.globalId === globalId);
+                if (found) { mod = found; break; }
+            }
+        }
         if (!mod) return;
 
         const questions = getModuleQuestions(mod);
