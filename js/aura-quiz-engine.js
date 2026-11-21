@@ -9,7 +9,7 @@
     // Parser especializado para extraer las 10 preguntas del "Punto 9: Examen de Comprensión / Graduación"
     function parseExamQuestionsFromMarkdown(rawMd) {
         if (!rawMd) return null;
-        const match = rawMd.match(/## 9\.\s*Examen[\s\S]*?\n([\s\S]*?)(?=(?:---\s*\n+)?## 10\.|\Z)/i);
+        const match = rawMd.match(/## 9\.\s*Examen[\s\S]*?\n([\s\S]*?)(?=(?:---\s*\n+)?## 10\.|$)/i);
         if (!match) return null;
 
         const section = match[1];
@@ -29,10 +29,10 @@
             const qTitle = titleMatch[1].replace(/\s+/g, ' ').trim();
 
             // Encontrar opciones a/A, b/B, c/C, d/D con ) o .
-            const optAMatch = block.match(/(?:^|\n)\s*[aA][\)\.]\s*([\s\S]*?)(?=\n\s*[bB][\)\.]|\Z)/);
-            const optBMatch = block.match(/(?:^|\n)\s*[bB][\)\.]\s*([\s\S]*?)(?=\n\s*[cC][\)\.]|\Z)/);
-            const optCMatch = block.match(/(?:^|\n)\s*[cC][\)\.]\s*([\s\S]*?)(?=\n\s*[dD][\)\.]|\Z)/);
-            const optDMatch = block.match(/(?:^|\n)\s*[dD][\)\.]\s*([\s\S]*?)(?=\n\s*\*(?:\(?)?(?:Respuesta|Opción) correcta|\Z)/i);
+            const optAMatch = block.match(/(?:^|\n)\s*[aA][\)\.]\s*([\s\S]*?)(?=\n\s*[bB][\)\.]|$)/);
+            const optBMatch = block.match(/(?:^|\n)\s*[bB][\)\.]\s*([\s\S]*?)(?=\n\s*[cC][\)\.]|$)/);
+            const optCMatch = block.match(/(?:^|\n)\s*[cC][\)\.]\s*([\s\S]*?)(?=\n\s*[dD][\)\.]|$)/);
+            const optDMatch = block.match(/(?:^|\n)\s*[dD][\)\.]\s*([\s\S]*?)(?=\n\s*\*(?:\(?)?(?:[Rr]espuesta|[Oo]pci[oó]n) correcta|$)/i);
 
             if (!optAMatch || !optBMatch || !optCMatch || !optDMatch) continue;
 
@@ -45,7 +45,7 @@
             ];
 
             // Encontrar respuesta correcta indicada en el texto: *(Respuesta correcta: b)* o *Respuesta correcta: B*
-            const ansMatch = block.match(/\*(?:\()?([Rr]espuesta|[Oo]pción) correcta:?\s*([a-dA-D])(?:\))?\*/i);
+            const ansMatch = block.match(/\*(?:\()?([Rr]espuesta|[Oo]pci[oó]n) correcta:?\s*([a-dA-D])(?:\))?\*/i);
             let correctIdx = 0;
             if (ansMatch) {
                 const letter = ansMatch[2].toLowerCase();
@@ -53,7 +53,7 @@
             }
 
             // Encontrar explicación si existe
-            const explMatch = block.match(/\*[Ee]xplicación:\s*([^*]+)\*/);
+            const explMatch = block.match(/\*[Ee]xplicaci[oó]n:\s*([^*]+)\*/);
             const explanation = explMatch ? explMatch[1].trim() : `La opción correcta es la (${String.fromCharCode(65 + correctIdx).toLowerCase()}): "${options[correctIdx]}".`;
 
             questions.push({

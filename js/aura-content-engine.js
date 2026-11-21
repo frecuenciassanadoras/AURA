@@ -107,17 +107,24 @@ Continúa abajo con la **Evaluación Somática Interactiva (10 Preguntas)** para
     function stripStaticExamSection(md) {
         if (!md) return '';
         return md
-            // Eliminar Sección 9 (Examen de Comprensión) completa hasta la sección 10 o fin
-            .replace(/## 9\.\s*Examen de [Cc]omprensión[\s\S]*?(?=(?:---\s*\n+)?## 10\.|\Z)/g, '')
+            // Eliminar Sección 9 (Examen de Comprensión / Graduación) completa hasta la sección 10 o fin
+            .replace(/## 9\.\s*Examen[\s\S]*?(?=(?:---\s*\n+)?## 10\.|$)/gi, '')
             // Eliminar Sección 6 de autoevaluación estática si existiera
-            .replace(/## 6\.\s*Autoevaluación de Comprensión[\s\S]*?(?=(?:---\s*\n+)?## 7\.|\Z)/g, '');
+            .replace(/## 6\.\s*Autoevaluación de Comprensión[\s\S]*?(?=(?:---\s*\n+)?## 7\.|$)/gi, '');
     }
 
     // Proveedor del contenido original completo (para que el motor de cuestionarios extraiga preguntas)
     window.getRawModuleContent = function(mod) {
         if (!mod) return "";
-        if (window.MODULES_CONTENT && window.MODULES_CONTENT[String(mod.id)]) {
-            return window.MODULES_CONTENT[String(mod.id)];
+        let modId = mod.id;
+        if ((modId === undefined || modId === null) && mod.globalId && window.AURA_STEPS) {
+            for (const step of window.AURA_STEPS) {
+                const found = step.modules.find(m => m.globalId === mod.globalId);
+                if (found) { modId = found.id; break; }
+            }
+        }
+        if (window.MODULES_CONTENT && window.MODULES_CONTENT[String(modId)]) {
+            return window.MODULES_CONTENT[String(modId)];
         }
         return generateDeepModuleLesson(mod);
     };
